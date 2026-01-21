@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ultimate Git Cheat Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        background-color: #020617;
+        background-image:
+          radial-gradient(
+            circle at 50% 0%,
+            rgba(59, 130, 246, 0.15) 0%,
+            transparent 50%
+          ),
+          linear-gradient(rgba(30, 41, 59, 0.2) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(30, 41, 59, 0.2) 1px, transparent 1px);
+        background-size:
+          100% 100%,
+          30px 30px,
+          30px 30px;
+        color: #94a3b8;
+        font-family: "Inter", sans-serif;
+      }
+      .glass-card {
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .command-row {
+        transition: all 0.2s ease;
+        cursor: pointer;
+        border-left: 2px solid transparent;
+      }
+      .command-row:hover {
+        background: rgba(59, 130, 246, 0.1);
+        border-left: 2px solid #3b82f6;
+        transform: translateX(4px);
+      }
+      .highlight {
+        color: #f1f5f9;
+        font-weight: 600;
+      }
+      /* Hide sections if all children are filtered out */
+      .hidden-section {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen py-12 px-6">
+    <header class="text-center mb-16 max-w-3xl mx-auto">
+      <div
+        class="inline-block p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 mb-6"
+      >
+        <i class="fas fa-terminal text-2xl text-blue-400"></i>
+      </div>
+      <h1 class="text-5xl font-black text-white tracking-tight mb-4">
+        Git <span class="text-blue-500">Terminal</span> Reference
+      </h1>
+
+      <div class="relative mt-10">
+        <i
+          class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"
+        ></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by command (e.g. 'rebase') or use (e.g. 'undo')..."
+          class="w-full bg-slate-900/80 border border-slate-700 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all shadow-2xl"
+        />
+      </div>
+    </header>
+
+    <main
+      id="commandGrid"
+      class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+    >
+      <section class="category-section glass-card rounded-2xl overflow-hidden">
+        <div
+          class="bg-slate-800/50 p-4 border-b border-white/5 flex items-center gap-3"
+        >
+          <i class="fas fa-seedling text-green-400"></i>
+          <h2 class="text-white font-bold text-sm uppercase tracking-widest">
+            Daily Git Basics
+          </h2>
+        </div>
+        <div class="p-2 space-y-1">
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git init start new repo create repository"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-pink-400">git init</code>
+              <span class="text-xs text-slate-400">Start new repo</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: Run in project root to initialize git.
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git clone copy remote download github"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-pink-400">git clone</code>
+              <span class="text-xs text-slate-400">Copy remote repo</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: git clone [url]
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git status check state current files"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-pink-400">git status</code>
+              <span class="text-xs text-slate-400">Check repo state</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: See which files are modified or staged.
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git add stage changes prepare commit"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-pink-400">git add .</code>
+              <span class="text-xs text-slate-400">Stage changes</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: git add index.html
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git commit save changes record history"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-pink-400">git commit</code>
+              <span class="text-xs text-slate-400">Save changes</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: git commit -m "Initial commit"
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git log history view commits list"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-pink-400">git log</code>
+              <span class="text-xs text-slate-400">View history</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: git log --oneline
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section glass-card rounded-2xl overflow-hidden">
+        <div
+          class="bg-slate-800/50 p-4 border-b border-white/5 flex items-center gap-3"
+        >
+          <i class="fas fa-code-branch text-purple-400"></i>
+          <h2 class="text-white font-bold text-sm uppercase tracking-widest">
+            Branching
+          </h2>
+        </div>
+        <div class="p-2 space-y-1">
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git branch list show all"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-purple-400">git branch</code>
+              <span class="text-xs text-slate-400">List branches</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: Shows all local branches.
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git branch name create new"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-purple-400">git branch [name]</code>
+              <span class="text-xs text-slate-400">Create branch</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: git branch feature-login
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git checkout switch move change"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-purple-400">git checkout</code>
+              <span class="text-xs text-slate-400">Switch branch</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: git checkout main
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git checkout -b create switch new"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-purple-400">git checkout -b</code>
+              <span class="text-xs text-slate-400">Create + switch</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: Short for branch + checkout.
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git merge combine join branches"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-purple-400">git merge</code>
+              <span class="text-xs text-slate-400">Merge branches</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: git merge feature-branch
+            </p>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git rebase clean history rewrite"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-purple-400">git rebase</code>
+              <span class="text-xs text-slate-400">Clean history</span>
+            </div>
+            <p class="text-[11px] mt-1 text-slate-500 italic">
+              Example: git rebase main
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section glass-card rounded-2xl overflow-hidden">
+        <div
+          class="bg-slate-800/50 p-4 border-b border-white/5 flex items-center gap-3"
+        >
+          <i class="fas fa-globe text-blue-400"></i>
+          <h2 class="text-white font-bold text-sm uppercase tracking-widest">
+            Remote & Collab
+          </h2>
+        </div>
+        <div class="p-2 space-y-1">
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git remote -v check urls origin"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-blue-300">git remote -v</code>
+              <span class="text-xs text-slate-400">Check remotes</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git pull fetch merge update cloud"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-blue-300">git pull</code>
+              <span class="text-xs text-slate-400">Fetch + merge</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git push upload send online github"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-blue-300">git push</code>
+              <span class="text-xs text-slate-400">Upload commits</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git fetch download see changes"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-blue-300">git fetch</code>
+              <span class="text-xs text-slate-400">Download changes</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git pull --rebase clean sync no merge"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-blue-300">git pull --rebase</code>
+              <span class="text-xs text-slate-400">Clean sync</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git push -u origin main set upstream first time"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-blue-300">git push -u</code>
+              <span class="text-xs text-slate-400">Set upstream</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section glass-card rounded-2xl overflow-hidden">
+        <div
+          class="bg-slate-800/50 p-4 border-b border-white/5 flex items-center gap-3"
+        >
+          <i class="fas fa-undo text-red-400"></i>
+          <h2 class="text-white font-bold text-sm uppercase tracking-widest">
+            Undo Like a Pro
+          </h2>
+        </div>
+        <div class="p-2 space-y-1">
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git restore discard remove local changes"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-red-400">git restore</code>
+              <span class="text-xs text-slate-400">Discard changes</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git reset unstage back remove from add"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-red-400">git reset</code>
+              <span class="text-xs text-slate-400">Unstage commits</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git revert safe undo history commit"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-red-400">git revert</code>
+              <span class="text-xs text-slate-400">Safe undo commit</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git stash save work temporary hide"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-red-400">git stash</code>
+              <span class="text-xs text-slate-400">Save work temporarily</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git stash pop restore bring back"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-red-400">git stash pop</code>
+              <span class="text-xs text-slate-400">Restore stashed</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git reset --hard full rollback destroy delete"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-red-400">git reset --hard</code>
+              <span class="text-xs text-slate-400">Full rollback</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section glass-card rounded-2xl overflow-hidden">
+        <div
+          class="bg-slate-800/50 p-4 border-b border-white/5 flex items-center gap-3"
+        >
+          <i class="fas fa-bug text-yellow-400"></i>
+          <h2 class="text-white font-bold text-sm uppercase tracking-widest">
+            Debugging
+          </h2>
+        </div>
+        <div class="p-2 space-y-1">
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git blame who author line history"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-yellow-400">git blame</code>
+              <span class="text-xs text-slate-400">Who broke this?</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git show inspect view specific commit"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-yellow-400">git show</code>
+              <span class="text-xs text-slate-400">Inspect commit</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git reflog recover lost deleted commits"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-yellow-400">git reflog</code>
+              <span class="text-xs text-slate-400">Recover lost commits</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git diff see code changes compare"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-yellow-400">git diff</code>
+              <span class="text-xs text-slate-400">See code changes</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="category-section glass-card rounded-2xl overflow-hidden">
+        <div
+          class="bg-slate-800/50 p-4 border-b border-white/5 flex items-center gap-3"
+        >
+          <i class="fas fa-fire text-orange-400"></i>
+          <h2 class="text-white font-bold text-sm uppercase tracking-widest">
+            Power Commands
+          </h2>
+        </div>
+        <div class="p-2 space-y-1">
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git cherry-pick pick specific single commit"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-orange-400">git cherry-pick</code>
+              <span class="text-xs text-slate-400">Pick specific commit</span>
+            </div>
+          </div>
+          <div
+            class="command-row p-3 rounded-lg"
+            data-search="git clean -fd remove junk delete untracked"
+          >
+            <div class="flex justify-between items-center">
+              <code class="text-orange-400">git clean -fd</code>
+              <span class="text-xs text-slate-400">Remove junk files</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div
+      id="toast"
+      class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-6 py-3 rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-300"
+    >
+      Copied to clipboard! 📋
+    </div>
+
+    <script>
+      // Search Functionality
+      const searchInput = document.getElementById("searchInput");
+      const commandRows = document.querySelectorAll(".command-row");
+      const sections = document.querySelectorAll(".category-section");
+
+      searchInput.addEventListener("input", (e) => {
+        const term = e.target.value.toLowerCase();
+
+        sections.forEach((section) => {
+          let sectionHasMatch = false;
+          const rows = section.querySelectorAll(".command-row");
+
+          rows.forEach((row) => {
+            const searchText = row.getAttribute("data-search").toLowerCase();
+            if (searchText.includes(term)) {
+              row.style.display = "block";
+              sectionHasMatch = true;
+            } else {
+              row.style.display = "none";
+            }
+          });
+
+          // Hide the entire category if no commands match
+          if (sectionHasMatch) {
+            section.classList.remove("hidden-section");
+          } else {
+            section.classList.add("hidden-section");
+          }
+        });
+      });
+
+      // Copy Functionality
+      function copyText(text) {
+        navigator.clipboard.writeText(text);
+        const toast = document.getElementById("toast");
+        toast.classList.remove("opacity-0", "translate-y-4");
+        toast.classList.add("opacity-100", "-translate-y-2");
+
+        setTimeout(() => {
+          toast.classList.add("opacity-0", "translate-y-4");
+          toast.classList.remove("opacity-100", "-translate-y-2");
+        }, 1500);
+      }
+
+      commandRows.forEach((row) => {
+        row.addEventListener("click", () => {
+          const cmd = row.querySelector("code").innerText;
+          copyText(cmd);
+        });
+      });
+    </script>
+  </body>
+</html>
