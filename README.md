@@ -2,7 +2,8 @@
 
 A high-performance, interactive Git command reference built with **HTML5**, **Tailwind CSS**, and **JavaScript**. Designed for developers who want a quick, searchable, and "click-to-copy" terminal guide.
 
-![Git Cheat Sheet Preview](https://spyaj.github.io/gitSheet/)
+![Git Cheat Sheet Preview]:
+Live link: (https://spyaj.github.io/gitSheet/)
 
 ## ✨ Features
 
